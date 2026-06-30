@@ -30,7 +30,8 @@ public class ArrestState : MonoBehaviour
         if (agent == null) return;
 
         // Determine player target position
-        Vector3 targetPos = agent.playerTarget != null ? agent.playerTarget.transform.position : Vector3.zero;
+        Vector3 targetPos = agent.playerTarget != null ? agent.playerTarget.transform.position : transform.position;
+        targetPos.y = transform.position.y; // Maintain same height
 
         // Walk directly into the player's face
         if (agent.distanceToPlayer > 1.8f)

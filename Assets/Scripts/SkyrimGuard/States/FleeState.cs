@@ -44,8 +44,10 @@ public class FleeState : MonoBehaviour
         if (agent == null) return;
 
         // Determine player/threat position
-        Vector3 playerPos = agent.playerTarget != null ? agent.playerTarget.transform.position : Vector3.zero;
-        Vector3 fleeDir = (transform.position - playerPos).normalized;
+        Vector3 playerPos = agent.playerTarget != null ? agent.playerTarget.transform.position : transform.position;
+        Vector3 direction = transform.position - playerPos;
+        direction.y = 0f; // Flatten direction to ignore height difference
+        Vector3 fleeDir = direction.normalized;
         if (fleeDir == Vector3.zero) fleeDir = Vector3.back;
 
         // Flee target destination is 15 meters in the opposite direction

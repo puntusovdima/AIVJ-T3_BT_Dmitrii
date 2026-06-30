@@ -91,7 +91,7 @@ public class SkyrimGuardDecisionTreeController : MonoBehaviour
         if (agent == null || stateMachine == null) return;
 
         // Display current AI state and world state info at the top-left of the screen
-        Rect statsRect = new Rect(20, 20, 300, 160);
+        Rect statsRect = new Rect(20, 20, 300, 185);
         GUI.Box(statsRect, "SKYRIM GUARD AI MONITOR");
         
         GUILayout.BeginArea(new Rect(statsRect.x + 10, statsRect.y + 20, statsRect.width - 20, statsRect.height - 30));
@@ -104,7 +104,7 @@ public class SkyrimGuardDecisionTreeController : MonoBehaviour
         GUILayout.EndArea();
 
         // Display interactive test control panel at the bottom-left of the screen
-        Rect controlsRect = new Rect(20, 190, 300, 280);
+        Rect controlsRect = new Rect(20, 215, 300, 280);
         GUI.Box(controlsRect, "TEST CONTROL PANEL");
 
         GUILayout.BeginArea(new Rect(controlsRect.x + 10, controlsRect.y + 20, controlsRect.width - 20, controlsRect.height - 30));
