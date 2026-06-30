@@ -27,7 +27,7 @@ public class SkyrimGuardAgent : MonoBehaviour
 
     [Header("Patrol Settings")]
     [Tooltip("Waypoints for patrolling. If empty, default random ones are generated.")]
-    public Vector3[] patrolWaypoints;
+    public Transform[] patrolWaypoints;
     
     [HideInInspector]
     public int currentWaypointIndex = 0;
@@ -38,15 +38,24 @@ public class SkyrimGuardAgent : MonoBehaviour
         if (patrolWaypoints == null || patrolWaypoints.Length == 0)
         {
             Vector3 startPos = transform.position;
-            patrolWaypoints = new Vector3[]
+            Vector3[] mockOffsets = new Vector3[]
             {
-                startPos,
-                startPos + new Vector3(5f, 0f, 5f),
-                startPos + new Vector3(-5f, 0f, 8f),
-                startPos + new Vector3(0f, 0f, 12f)
+                Vector3.zero,
+                new Vector3(5f, 0f, 5f),
+                new Vector3(-5f, 0f, 8f),
+                new Vector3(0f, 0f, 12f)
             };
+
+            patrolWaypoints = new Transform[mockOffsets.Length];
+            for (int i = 0; i < mockOffsets.Length; i++)
+            {
+                GameObject wp = new GameObject($"Waypoint_{i}");
+                wp.transform.position = startPos + mockOffsets[i];
+                patrolWaypoints[i] = wp.transform;
+            }
         }
     }
+
 
     void Start()
     {

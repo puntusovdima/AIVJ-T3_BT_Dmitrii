@@ -43,7 +43,15 @@ public class PatrolState : MonoBehaviour
     {
         if (agent == null || agent.patrolWaypoints == null || agent.patrolWaypoints.Length == 0) return;
 
-        Vector3 targetPos = agent.patrolWaypoints[agent.currentWaypointIndex];
+        Transform currentWaypoint = agent.patrolWaypoints[agent.currentWaypointIndex];
+        if (currentWaypoint == null)
+        {
+            // Skip null waypoint to avoid NullReferenceException
+            agent.currentWaypointIndex = (agent.currentWaypointIndex + 1) % agent.patrolWaypoints.Length;
+            return;
+        }
+
+        Vector3 targetPos = currentWaypoint.position;
 
         if (navMeshAgent != null && navMeshAgent.isOnNavMesh)
         {
