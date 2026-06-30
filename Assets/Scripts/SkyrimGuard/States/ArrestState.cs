@@ -83,6 +83,10 @@ public class ArrestState : MonoBehaviour
             Debug.Log("<color=yellow>[Arrest Choice]</color> Player: I pay the fine.");
             Debug.Log("<color=green>[Arrest Result]</color> Guard: \"Alright, smart guy. I'll take that. Now move along.\"");
             agent.playerBounty = 0; // Clear bounty
+            if (agent.playerTarget != null)
+            {
+                agent.playerTarget.transform.position = transform.position + transform.forward * 8.0f;
+            }
             agent.distanceToPlayer = 8f; // Reset distance
         }
 
@@ -91,6 +95,10 @@ public class ArrestState : MonoBehaviour
             Debug.Log("<color=yellow>[Arrest Choice]</color> Player: Take me to jail.");
             Debug.Log("<color=green>[Arrest Result]</color> Guard: \"Hope you like Cidhna Mine. Let's go.\"");
             agent.playerBounty = 0; // Clear bounty
+            if (agent.playerTarget != null)
+            {
+                agent.playerTarget.transform.position = transform.position + transform.forward * 8.0f;
+            }
             agent.distanceToPlayer = 8f; // Reset distance
             agent.HealFull(); // Restored health
         }

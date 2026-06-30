@@ -148,11 +148,19 @@ public class SkyrimGuardDecisionTreeController : MonoBehaviour
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Approach Guard (Near)"))
         {
+            if (agent.playerTarget != null)
+            {
+                agent.playerTarget.transform.position = agent.transform.position + agent.transform.forward * 3.0f;
+            }
             agent.distanceToPlayer = 3.0f;
             Debug.Log("[Control Panel] Player stepped close to guard.");
         }
         if (GUILayout.Button("Back Away (Far)"))
         {
+            if (agent.playerTarget != null)
+            {
+                agent.playerTarget.transform.position = agent.transform.position + agent.transform.forward * 15.0f;
+            }
             agent.distanceToPlayer = 15.0f;
             Debug.Log("[Control Panel] Player backed away from guard.");
         }
