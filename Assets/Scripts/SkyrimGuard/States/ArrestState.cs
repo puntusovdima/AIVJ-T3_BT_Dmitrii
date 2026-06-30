@@ -33,6 +33,12 @@ public class ArrestState : MonoBehaviour
         Vector3 targetPos = agent.playerTarget != null ? agent.playerTarget.transform.position : transform.position;
         targetPos.y = transform.position.y; // Maintain same height
 
+        // If simulating (no player target), manually decrease the simulated distance over time
+        if (agent.playerTarget == null && agent.distanceToPlayer > 1.8f)
+        {
+            agent.distanceToPlayer = Mathf.Max(1.5f, agent.distanceToPlayer - 3f * Time.deltaTime);
+        }
+
         // Walk directly into the player's face
         if (agent.distanceToPlayer > 1.8f)
         {

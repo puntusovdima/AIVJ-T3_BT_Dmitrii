@@ -56,6 +56,13 @@ public class CombatState : MonoBehaviour
         Vector3 targetPos = agent.playerTarget != null ? agent.playerTarget.transform.position : transform.position;
         targetPos.y = transform.position.y; // Maintain same height
 
+        // If simulating (no player target), manually decrease the simulated distance over time
+        if (agent.playerTarget == null && agent.distanceToPlayer > attackRange)
+        {
+            float travelDistance = chaseSpeed * Time.deltaTime;
+            agent.distanceToPlayer = Mathf.Max(attackRange - 0.1f, agent.distanceToPlayer - travelDistance);
+        }
+
         // Pursue threat / player
         if (agent.distanceToPlayer > attackRange)
         {
